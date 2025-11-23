@@ -1,3 +1,4 @@
-import "./style.css";
+import { renderRoute } from "./router";
 
-document.getElementById('app').innerHTML = `Hello from webpack!`;
+window.addEventListener("load", renderRoute);
+window.addEventListener("popstate", renderRoute);

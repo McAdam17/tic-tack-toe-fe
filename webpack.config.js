@@ -5,7 +5,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
-    clean: true
+    clean: true,
+    publicPath: '/',
   },
   mode: 'development',
   module: {
@@ -30,5 +31,6 @@ module.exports = {
     port: 3000,
     open: true,
     hot: true,
+    historyApiFallback: true,
   }
 };
