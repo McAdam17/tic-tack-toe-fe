@@ -42,7 +42,17 @@ export function renderRoute() {
 }
 
 export function navigate(path) {
-  const normalizePath = normalizePath(path);
-  window.history.pushState({},'', normalizePath); 
+  const pathFormatted = normalizePath(path);
+  window.history.pushState({},'', pathFormatted); 
   renderRoute();
+}
+
+export function setUpNavigationElements(navLinks) {
+  navLinks.forEach(link => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const path = link.getAttribute('href')
+      navigate(path)
+    })
+  })
 }

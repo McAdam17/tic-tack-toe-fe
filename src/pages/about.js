@@ -1,3 +1,5 @@
+import { setUpNavigationElements } from "../router";
+
 export const AboutPage = () =>  {
   return {
     template() {
@@ -13,7 +15,8 @@ export const AboutPage = () =>  {
       `
     },
     hydrate() {
-      console.log("About page hydrated");
+      const navLinks = document.querySelectorAll('a[href^="/"]');
+      setUpNavigationElements(navLinks);
     }
   }
 }

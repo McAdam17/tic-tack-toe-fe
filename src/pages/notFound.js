@@ -1,3 +1,5 @@
+import { setUpNavigationElements } from "../router";
+
 export const NotFoundPage = () => {
   return {
     template() {
@@ -13,7 +15,8 @@ export const NotFoundPage = () => {
       `
     },
     hydrate() {
-      console.log("Not Found page hydrated");
+      const navLinks = document.querySelectorAll('a[href^="/"]');
+      setUpNavigationElements(navLinks);
     }
   }
 }

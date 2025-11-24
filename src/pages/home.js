@@ -1,4 +1,4 @@
-import { navigate } from "../router";
+import { setUpNavigationElements } from "../router";
 
 export const HomePage = () => {
   return {
@@ -17,14 +17,7 @@ export const HomePage = () => {
     },
     hydrate() {
       const navLinks = document.querySelectorAll('a[href^="/"]');
-
-      navLinks.forEach(link => {
-        link.addEventListener('click', (event) => {
-          event.preventDefault();
-          const path = link.getAttribute('href')
-          navigate(path)
-        })
-      })
+      setUpNavigationElements(navLinks);
     }
   }
 }
