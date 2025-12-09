@@ -32,5 +32,6 @@ module.exports = {
     open: true,
     hot: true,
     historyApiFallback: true,
+    watchFiles: ['src/**/*', 'public/**/*'],
   }
 };
