@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
@@ -9,8 +9,22 @@ module.exports = {
     publicPath: '/',
   },
   mode: 'development',
+  resolve: { extensions: [".ts", ".tsx", ".js"] },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [
+              ["@babel/preset-env", { targets: "defaults" }],
+              "@babel/preset-typescript"
+            ]
+          }
+        }
+      },
       {
         test: /\.js$/,  
         exclude: /node_modules/,

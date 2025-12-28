@@ -1,6 +1,6 @@
-import { setUpNavigationElements } from "../router";
+import { PageFunction, setUpNavigationElements } from "../router";
 
-export const AboutPage = () =>  {
+export const NotFoundPage: PageFunction = () => {
   return {
     template() {
       return `
@@ -9,8 +9,8 @@ export const AboutPage = () =>  {
             <a href="/">Home</a>
             <a href="/about">About</a>
           </nav>
-          <h1>About</h1>
-          <p>This is a simple SPA built with pure JavaScript.</p>
+          <h1>404 - Not Found</h1>
+          <p>The page you are looking for does not exist.</p>
         </section>
       `
     },

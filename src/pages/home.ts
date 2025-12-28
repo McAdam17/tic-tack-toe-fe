@@ -1,8 +1,8 @@
-import { setUpNavigationElements } from "../router";
+import { PageFunction, setUpNavigationElements } from "../router";
 import { loginModal } from "../components/login_modal";
 import { registerModal } from "../components/register_modal";
 
-export const HomePage = () => {
+export const HomePage: PageFunction = () => {
   return {
     template() {
       return `
@@ -39,10 +39,11 @@ export const HomePage = () => {
         const modalPivot = document.getElementById('modal_pivot');
         const modalComponent = loginModal({
           onClose: () => {
+            if (modalPivot)
             modalPivot.innerHTML = '';
           }
         });
-        modalPivot.appendChild(modalComponent)
+        modalPivot?.appendChild(modalComponent)
       }
 
       loginButtons.forEach(btn => {
@@ -52,15 +53,16 @@ export const HomePage = () => {
       })
 
       const registerButton = document.querySelector('.register_button');
-      registerButton.addEventListener('click', () => {
+      registerButton?.addEventListener('click', () => {
         const modalPivot = document.getElementById('modal_pivot')
         const modalComponent = registerModal({
           onClose: () => {
+            if(modalPivot)
             modalPivot.innerHTML = '';
           }
         })
 
-        modalPivot.appendChild(modalComponent)
+        modalPivot?.appendChild(modalComponent)
       })
     
     }

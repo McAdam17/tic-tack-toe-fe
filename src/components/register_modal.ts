@@ -1,16 +1,18 @@
+interface RegisterModalProps {
+  onClose?: () => void
+}
 
-export function loginModal(props) {
+export function registerModal(props?: RegisterModalProps) {
   const modalContainer = document.createElement('div');
 
   const title = document.createElement('h2')
-  title.textContent = 'Login';
+  title.textContent = 'Register';
 
   const closeButton = document.createElement('button');
   closeButton.textContent = 'X';
 
   const subtitle = document.createElement('p');
-  subtitle.textContent = 'Please enter your credentials to log in.';
-
+  subtitle.textContent = 'Please enter your information to register.';
 
   const titleContainer = document.createElement('div');
 
@@ -28,9 +30,15 @@ export function loginModal(props) {
   passInput.type = 'password';
   passInput.name = 'password';
 
+  const confirmPassLabel = document.createElement('label');
+  confirmPassLabel.textContent = 'Confirm Password: ';
+  const confirmPassInput = document.createElement('input')
+  confirmPassInput.type = 'password';
+  confirmPassInput.name = 'confirm_password';
+  
   const submitButton = document.createElement('button');
   submitButton.type = 'submit';
-  submitButton.textContent = 'Login';
+  submitButton.textContent = 'Register';
 
   titleContainer.appendChild(title)
   titleContainer.appendChild(closeButton)
@@ -41,6 +49,8 @@ export function loginModal(props) {
   form.appendChild(userInput)
   form.appendChild(passLabel)
   form.appendChild(passInput)
+  form.appendChild(confirmPassLabel)
+  form.appendChild(confirmPassInput)
   form.appendChild(submitButton)
   
   modalContainer.appendChild(form)
@@ -54,7 +64,7 @@ export function loginModal(props) {
 
   // event listeners
   closeButton.addEventListener('click', () => {
-    props?.onClose()
+    props?.onClose?.()
   })
 
   return modalContainer;
