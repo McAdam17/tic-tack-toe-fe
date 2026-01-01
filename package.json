@@ -19,6 +19,7 @@
     "@babel/preset-typescript": "^7.28.5",
     "babel-loader": "^10.0.0",
     "css-loader": "^7.1.2",
+    "dotenv": "^17.2.3",
     "style-loader": "^4.0.0",
     "typescript": "^5.9.3",
     "webpack": "^5.103.0",

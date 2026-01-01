@@ -1,6 +1,11 @@
 import { renderRoute } from "./router";
+import { init } from "./auth/authStore";
 
-window.addEventListener("load", renderRoute);
+window.addEventListener("load", async () => {
+  await init()
+  renderRoute()
+});
+
 window.addEventListener("popstate", renderRoute);
 
 // HMR - Hot Module Replacement

@@ -1,4 +1,6 @@
+import { getAuthState } from "./auth/authStore";
 import { AboutPage } from "./pages/about";
+import { GamePage } from "./pages/game";
 import { HomePage } from "./pages/home";
 import { NotFoundPage } from "./pages/notFound";
 
@@ -9,9 +11,20 @@ let currentPageCleanup : CleanUpFunction | null = null;
 const routes = {
   "/": HomePage,
   "/about": AboutPage,
+  "/game": GamePage,
 }
 
 type Paths = keyof typeof routes
+
+export const PRIVATE_ROUTES = new Set<Paths>(["/game"])
+
+function isKnownPath(path: string): path is Paths {
+  return path in routes
+}
+
+const isPrivateRoute = (path: string) => {
+  return isKnownPath(path) && PRIVATE_ROUTES.has(path)
+}
 
 export interface Page {
   cleanup?: CleanUpFunction | null;
@@ -34,13 +47,21 @@ function getComponent(pathname: string): PageFunction {
 }
 
 export function renderRoute() {
+  const state = getAuthState()
+
   if (currentPageCleanup) {
     currentPageCleanup();
     currentPageCleanup = null;
   }
 
   const pathname = window.location.pathname;
-  const Component = getComponent(pathname);
+
+  const normalizedPath = normalizePath(pathname)
+  let Component = getComponent(pathname);
+  if(isPrivateRoute(normalizedPath) && state.status!=='authed'){
+    Component = HomePage
+  }
+ 
   const page = Component();
 
   const app = document.getElementById("app");

@@ -14,7 +14,6 @@ export function loginModal(props?: LoginModalProps) {
   const subtitle = document.createElement('p');
   subtitle.textContent = 'Please enter your credentials to log in.';
 
-
   const titleContainer = document.createElement('div');
 
   const form = document.createElement('form');
@@ -47,7 +46,6 @@ export function loginModal(props?: LoginModalProps) {
   form.appendChild(submitButton)
   
   modalContainer.appendChild(form)
-
 
   // css
   modalContainer.classList.add('modal_container_overlay');

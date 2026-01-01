@@ -1,16 +1,19 @@
 import axios from "axios"
 
-export const privateAPI = axios.create({
-  baseURL: process.env.BASE_API_PRIVATE_URL || "http://localhosh:3000",
+console.log('process.env.BASE_API_PUBLIC_URL',process.env.BASE_API_PUBLIC_URL)
+export const publicAPI = axios.create({
+  baseURL: process.env.BASE_API_PUBLIC_URL || "http://localhosh:3000",
   timeout: 10_000,
+  withCredentials: true,
   headers: {
     "Content-Type": "application/json"
   }
 })
 
-export const publicAPI = axios.create({
-  baseURL: process.env.BASE_API_PUBLIC_URL || "http://localhosh:3000",
+export const privateAPI = axios.create({
+  baseURL: process.env.BASE_API_PRIVATE_URL || "http://localhosh:3000",
   timeout: 10_000,
+  withCredentials: true,
   headers: {
     "Content-Type": "application/json"
   }

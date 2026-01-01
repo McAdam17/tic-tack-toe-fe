@@ -1,4 +1,6 @@
 const path = require('path')
+require("dotenv").config()
+const webpack = require("webpack");
 
 module.exports = {
   entry: './src/index.ts',
@@ -40,6 +42,12 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env.BASE_API_PUBLIC_URL": JSON.stringify(process.env.BASE_API_PUBLIC_URL),
+      "process.env.BASE_API_PRIVATE_URL": JSON.stringify(process.env.BASE_API_PRIVATE_URL),
+    })
+  ],
   devServer: {
     static: './public',
     port: 3000,
