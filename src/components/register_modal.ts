@@ -1,5 +1,16 @@
+import { publicAPI } from "../api/client";
+import { navigate } from "../router";
+
 interface RegisterModalProps {
   onClose?: () => void
+  onSuccess?: () => void
+}
+
+async function registerUser(username: string, password: string) {
+  return publicAPI.post('/signup', {
+    username,
+    password
+  })
 }
 
 export function registerModal(props?: RegisterModalProps) {
@@ -65,6 +76,25 @@ export function registerModal(props?: RegisterModalProps) {
   // event listeners
   closeButton.addEventListener('click', () => {
     props?.onClose?.()
+  })
+
+  submitButton.addEventListener('click', async (e) => {
+    e.preventDefault()
+    const username = userInput.value
+    const password = passInput.value
+    const confirmPassword = confirmPassInput.value
+
+    if (password === confirmPassword) {
+      try {
+        await registerUser(username, password)
+        navigate('/game')
+      }catch {
+        alert('error while registering user')
+      }
+    }else {
+      alert('password and confirm password fields much match')
+    }
+    
   })
 
   return modalContainer;

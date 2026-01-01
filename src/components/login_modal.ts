@@ -1,5 +1,15 @@
+import { publicAPI } from "../api/client";
+
 interface LoginModalProps {
   onClose?: () => void
+  onSuccess?: () => void
+}
+
+async function login(username:string, password: string) {
+  return await publicAPI.post('login', {
+    password,
+    username
+  })
 }
 
 export function loginModal(props?: LoginModalProps) {
@@ -56,6 +66,18 @@ export function loginModal(props?: LoginModalProps) {
   // event listeners
   closeButton.addEventListener('click', () => {
     props?.onClose?.()
+  })
+
+  submitButton.addEventListener('click', async (e) => {
+    e.preventDefault()
+    const userNameValue = userInput.value
+    const password = passInput.value
+    try {
+      await login(userNameValue, password)
+      props?.onSuccess?.()
+    }catch (e){
+      console.log(e)
+    }
   })
 
   return modalContainer;

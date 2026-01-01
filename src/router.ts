@@ -60,6 +60,7 @@ export function renderRoute() {
   let Component = getComponent(pathname);
   if(isPrivateRoute(normalizedPath) && state.status!=='authed'){
     Component = HomePage
+    window.history.pushState({}, '', '/')
   }
  
   const page = Component();

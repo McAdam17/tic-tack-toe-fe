@@ -1,4 +1,4 @@
-import { PageFunction, setUpNavigationElements } from "../router";
+import { navigate, PageFunction, setUpNavigationElements } from "../router";
 import { loginModal } from "../components/login_modal";
 import { registerModal } from "../components/register_modal";
 
@@ -41,6 +41,9 @@ export const HomePage: PageFunction = () => {
           onClose: () => {
             if (modalPivot)
             modalPivot.innerHTML = '';
+          },
+          onSuccess: () => {
+            navigate('/game')
           }
         });
         modalPivot?.appendChild(modalComponent)
@@ -59,7 +62,7 @@ export const HomePage: PageFunction = () => {
           onClose: () => {
             if(modalPivot)
             modalPivot.innerHTML = '';
-          }
+          },
         })
 
         modalPivot?.appendChild(modalComponent)
